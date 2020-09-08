@@ -1,23 +1,46 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-import { ScaledSheet } from 'react-native-size-matters';
+import { StyleSheet, Text, View, ScrollView } from 'react-native';
+import { Icon } from 'react-native-elements';
 
-import Header from '../components/header'
-import AddTodo from '../components/todos/AddTodo'
-import TodoList from '../components/todos/TodoList'
-import DetailsButtonNavigation from '../screens/DetailsButtonNav'
+import Header from '../components/header';
+import AddTodo from '../components/todos/AddTodo';
+import TodoList from '../components/todos/TodoList';
 
-const MainTodo = () => {
+const MainTodo = (props) => {
+
+    const { navigate } = props.navigation
 
     return(
-      <View>
+      <ScrollView>
         <View>
           <AddTodo />
           <TodoList />
-          <DetailsButtonNavigation />
         </View>
-      </View>
+        <View style={styles.iconButton}>  
+          <Icon
+            raised
+            reverse 
+            name={'plus'}
+            type='font-awesome'
+            color='#001ac4'
+            onPress={() => navigate('New Task')}
+            />
+        </View>
+      </ScrollView>
     );
 }
+
+const styles = StyleSheet.create({
+  containerIcon: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+  iconButton:  {
+    position: 'absolute',
+    top: 0,
+    right: 0,
+  }
+})
 
 export default MainTodo;

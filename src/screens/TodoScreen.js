@@ -2,7 +2,7 @@ import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 
 import MainTodo from '../container/MainTodo';
-import TodosDetail from '../components/todos/TodosDetail'
+import TodosDetail from '../components/todos/NewTask'
 
 const Stack = createStackNavigator();
 
@@ -16,11 +16,10 @@ const HomeStackScreen = () => {
                 headerTintColor: '#fff',
                 headerTitleStyle: {
                     color: '#fff',
-                    fontWeight: 'bold'
                 },
             }}>
             <Stack.Screen name='Home' component={MainTodo} />             
-            <Stack.Screen name='Details' component={TodosDetail} />
+            <Stack.Screen name='New Task' component={TodosDetail} />
         </Stack.Navigator>
      );
 }

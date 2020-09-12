@@ -3,7 +3,6 @@ import { StyleSheet, Text, View, ScrollView } from 'react-native';
 import { Icon } from 'react-native-elements';
 
 import Header from '../components/header';
-import AddTodo from '../components/todos/AddTodo';
 import TodoList from '../components/todos/TodoList';
 
 const MainTodo = (props) => {
@@ -11,35 +10,35 @@ const MainTodo = (props) => {
     const { navigate } = props.navigation
 
     return(
-      <ScrollView>
-        <View>
-          <AddTodo />
-          <TodoList />
+        <View style={styles.container}>
+          <ScrollView>
+            <TodoList navigate={navigate} />
+          </ScrollView>
+          <View style={styles.iconButton}>  
+            <Icon
+              raised
+              reverse 
+              name={'plus'}
+              type='font-awesome'
+              color='#001ac4'
+              onPress={() => navigate('NewTask')}
+              />
+          </View>
         </View>
-        <View style={styles.iconButton}>  
-          <Icon
-            raised
-            reverse 
-            name={'plus'}
-            type='font-awesome'
-            color='#001ac4'
-            onPress={() => navigate('New Task')}
-            />
-        </View>
-      </ScrollView>
     );
 }
 
 const styles = StyleSheet.create({
-  containerIcon: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center'
-  },
+  container: {
+    flex: 1,
+    justifyContent: 'flex-start',
+    flexDirection: 'row'
+  },  
   iconButton:  {
     position: 'absolute',
-    top: 0,
+    bottom: 0,
     right: 0,
+    margin: 8
   }
 })
 

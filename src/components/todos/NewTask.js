@@ -1,13 +1,18 @@
 import React from 'react';
 import { StyleSheet, Text, View, FlatList } from 'react-native';
-import AddTodo from '../components/todos/AddTodo';
+import AddTodo from './AddTodo';
 
-const TodosDetail = () => {
+const NewTask = (props) => {
     return (
-        <View>
+        <View style={styles.container}>
           <AddTodo />
         </View>
     );
 }
 
-export default TodosDetail;
+const styles = StyleSheet.create({
+  container: {
+    margin: 30
+  },
+})
+export default NewTask;

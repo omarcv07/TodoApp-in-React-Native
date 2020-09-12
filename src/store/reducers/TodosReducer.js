@@ -1,4 +1,5 @@
 import * as actionTypes from '../actions/actionTypes';
+import uuid from 'react-uuid'
 
 const initialState = {
     todo: [],
@@ -12,14 +13,16 @@ export const RootReducer = (state = initialState, action) =>  {
                 ...state,
                 todo: [
                     ...state.todo,
-                    {
+                    {   
+                        id: uuid(),
                         todo: action.payload,
-                        date: new Date().toISOString(),
                     },
                 ],
             };
-            
 
+        case actionTypes.DELETE_TODO: 
+            return state.filter(task => task !== action.payload)
+        
         default:
             return state
     }

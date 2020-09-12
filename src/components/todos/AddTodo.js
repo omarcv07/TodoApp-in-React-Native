@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, TextInput, TouchableOpacity } from 'react-native';
+import { View, StyleSheet, TouchableOpacity } from 'react-native';
+import { Input } from 'react-native-elements'
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { connect } from 'react-redux'
 import { addTodo } from '../../store/actions/actionCreators'
 
 const AddTodo = (props) => {
+
+    const text = ''
 
     const { addTodo } = props;
     const [value, setValue] = useState('')
@@ -16,10 +19,11 @@ const AddTodo = (props) => {
 
     return (
         <View style={styles.containerInput}>
-            <TextInput 
-                onChangeText={(text) => setValue(text)}
+            <Input
+                label='What is to be done'
                 placeholder='Enter Task Here'
-                style={styles.inputStyle}
+                labelStyle={styles.labelStyle}
+                onChangeText={(text) => setValue(text)}
             />
             <TouchableOpacity  onPress={() => handleAddTodo(value)}>
                 <View style={styles.containerButton}>
@@ -62,6 +66,9 @@ const styles = StyleSheet.create({
     buttonStyle: {
         color: '#de9595',
         padding: 10
+    },
+    labelStyle: {
+        color: '#005fc4'
     }
 })
 

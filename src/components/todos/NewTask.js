@@ -1,13 +1,14 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { StyleSheet, Text, View, FlatList } from 'react-native';
-import AddTodo from './AddTodo';
+import InputTodo from './InputTodo';
 
 const NewTask = (props) => {
-    return (
-        <View style={styles.container}>
-          <AddTodo />
-        </View>
-    );
+  
+  return (
+      <View style={styles.container}>
+        <InputTodo />
+      </View>
+  );
 }
 
 const styles = StyleSheet.create({

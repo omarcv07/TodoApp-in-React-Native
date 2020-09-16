@@ -1,19 +1,21 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, StyleSheet, TouchableOpacity } from 'react-native';
 import { Input } from 'react-native-elements'
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { connect } from 'react-redux'
-import { addTodo } from '../../store/actions/actionCreators'
+import { handleAddTodo } from '../../store/actions/actionCreators'
 
-const AddTodo = (props) => {
+const InputTodo = (props) => {
 
-    const text = ''
+    const { handleAddTodo, text } = props;
+    const [value, setValue] = useState(text)
 
-    const { addTodo } = props;
-    const [value, setValue] = useState('')
+    useEffect(() => {
+        props.navigation.setParams({ handleParamsTodo: handleTodo })
+    })
 
-    const handleAddTodo = (text) => {
-        addTodo(text)
+    const handleTodo = (text) => {
+        handleAddTodo(text)
         setValue('')
     }
 
@@ -23,27 +25,30 @@ const AddTodo = (props) => {
                 label='What is to be done'
                 placeholder='Enter Task Here'
                 labelStyle={styles.labelStyle}
-                onChangeText={(text) => setValue(text)}
+                onChangeText={() => {
+                    setValue(value)
+                    handleTodo(value)
+                }}
             />
-            <TouchableOpacity  onPress={() => handleAddTodo(value)}>
-                <View style={styles.containerButton}>
-                    <MaterialCommunityIcons name='plus' size={30} style={styles.buttonStyle} />
-                </View>
-            </TouchableOpacity>
         </View>
     );
 }
 
 const mapStateToProps = state => {
     return {
-
+        text: state.text
     }
 }
 
 const mapDispatchToProps = dispatch => ({
-    addTodo: (todo) => dispatch(addTodo(todo))
+    handleAddTodo: (todo) => dispatch(handleAddTodo(todo))
 })
 
+// <TouchableOpacity  onPress={() => handleTodo(value)}>
+// <View style={styles.containerButton}>
+//     <MaterialCommunityIcons name='plus' size={30} style={styles.buttonStyle} />
+// </View>
+// </TouchableOpacity>
 
 const styles = StyleSheet.create({
     containerInput: {
@@ -73,4 +78,4 @@ const styles = StyleSheet.create({
 })
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(AddTodo)
+export default connect(mapStateToProps, mapDispatchToProps)(InputTodo)

@@ -3,6 +3,7 @@ import uuid from 'react-uuid'
 
 const initialState = {
     todo: [],
+    text: ''
 };
 
 export const RootReducer = (state = initialState, action) =>  {

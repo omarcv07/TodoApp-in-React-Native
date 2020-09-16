@@ -27,4 +27,4 @@ export const ConfigureStore = () => {
     return { persistor, store };
 }
 
-clearAllData()
+// clearAllData()

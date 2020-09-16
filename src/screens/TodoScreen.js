@@ -1,15 +1,20 @@
-import React from 'react';
-import { View, StyleSheet } from 'react-native'
+import React, { useState } from 'react';
+import { View, StyleSheet } from 'react-native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { Icon } from 'react-native-elements';
+import { connect } from 'react-redux';
 
 import MainTodo from '../container/MainTodo';
-import NewTask from '../components/todos/NewTask'
-import TaskDetails from '../components/todos/TaskDetails'
+import NewTask from '../components/todos/NewTask';
+import { handleAddTodo } from '../store/actions/actionCreators'
+import TaskDetails from '../components/todos/TaskDetails';
 
 const Stack = createStackNavigator();
 
-const HomeStackScreen = () => {
+const HomeStackScreen = (props) => {
+
+    const { text } = props;
+
     return (
         <Stack.Navigator
             screenOptions={{
@@ -29,16 +34,18 @@ const HomeStackScreen = () => {
                 }}
             />             
             <Stack.Screen 
-                name='NewTask' 
+                name='NewTask'
                 component={NewTask} 
                 options={{
                     headerTitle: 'New Task',
-                    headerRight: () => (
+                    headerRight: ({ navigation }) => (
                         <Icon
+                            raised
                             reverse 
                             name={'check'}
                             color='#005fc4'
                             type='font-awesome'
+                            onPress={navigation.state.params.handleParamsTodo}
                         />
                     )
                 }}
@@ -76,4 +83,14 @@ const styles = StyleSheet.create({
     }
 })
 
-export default HomeStackScreen;
+const mapStateToProps = state => {
+    return {
+        text: state.text
+    }
+}
+
+const mapDispatchToProps = dispatch => ({
+    handleAddTodo: (todo) => dispatch(handleAddTodo(todo))
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(HomeStackScreen)
